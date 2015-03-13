@@ -2,6 +2,7 @@
 
 return array(
     'required'      => "不能为空",
+    'requiredIf'      => "不能为空",
     'equals'        => "必须和 '%s' 一致",
     'different'     => "必须和 '%s' 不一致",
     'accepted'      => "必须接受",

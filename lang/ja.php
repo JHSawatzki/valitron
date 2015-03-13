@@ -2,6 +2,7 @@
 
 return array(
     'required'      => "を入力してください",
+    'requiredIf'      => "を入力してください",
     'equals'        => "は「%s」と同じ内容を入力してください",
     'different'     => "は「%s」と異なる内容を入力してください",
     'accepted'      => "に同意してください",

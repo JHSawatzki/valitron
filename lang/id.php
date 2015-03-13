@@ -2,6 +2,7 @@
 
 return array(
     'required'      => "harus diisi",
+    'requiredIf'      => "harus diisi",
     'equals'        => "harus sama dengan '%s'",
     'different'     => "harus berbeda dengan '%s'",
     'accepted'      => "harus diterima (accepted)",

@@ -2,6 +2,7 @@
 
 return array(
     'required'      => "ir obligāts lauks",
+    'requiredIf'      => "ir obligāts lauks",
     'equals'        => "jāsakrīt ar '%s'",
     'different'     => "nedrīkst sakrist ar '%s' lauku",
     'accepted'      => "laukam jābūt apstiprinātam",

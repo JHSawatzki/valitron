@@ -2,6 +2,7 @@
 
 return array(
     'required'      => "مطلوب",
+    'requiredIf'      => "مطلوب",
     'equals'        => "يجب أن يكون مساوي لي '%s'",
     'different'     => "يجب ان يكون غير '%s'",
     'accepted'      => "يجب ان يكون نعم",

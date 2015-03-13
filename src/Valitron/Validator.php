@@ -144,6 +144,39 @@ class Validator
     }
 
     /**
+     * Conditional required field validator
+     *
+     * @param  string $field
+     * @param  mixed  $value
+     * @param  array  $params
+     * @internal param array $fields
+     * @internal param bool $isRequired
+     * @return bool
+     */
+    protected function validateRequiredIf($field, $value, array $params)
+    {
+        $field2 = $params[0];
+
+        // Check Field2 is available
+        $isRequired = isset($this->_fields[$field2]);
+
+        // Check Field2 matches value
+        if (isset($params[1])) {
+            $isRequired = ($params[1] == $this->_fields[$field2]);
+        }
+
+        if ($isRequired) {
+            if (is_null($value)) {
+                return false;
+            } elseif (is_string($value) && trim($value) === '') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Validate that two values match
      *
      * @param  string $field
@@ -857,8 +890,8 @@ class Validator
             foreach ($v['fields'] as $field) {
                  list($values, $multiple) = $this->getPart($this->_fields, explode('.', $field));
 
-                // Don't validate if the field is not required and the value is empty
-                if ($v['rule'] !== 'required' && !$this->hasRule('required', $field) && (! isset($values) || $values === '' || ($multiple && count($values) == 0))) {
+                // Don't validate if the field is not required or is not conditional required and the value is empty
+                if ($v['rule'] !== 'required' && $v['rule'] !== 'requiredIf' && !$this->hasRule('required', $field) && (! isset($values) || $values === '' || ($multiple && count($values) == 0))) {
                     continue;
                 }
 

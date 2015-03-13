@@ -49,6 +49,55 @@ class ValidateTest extends BaseTestCase
         $this->assertFalse($v->validate());
     }
 
+    public function testConditionalRequiredValid()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'bar'));
+        $v->rule('requiredIf', 'foo', 'bar');
+        $this->assertTrue($v->validate());
+    }
+
+    public function testConditionalRequiredNonExistentField()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'bar'));
+        $v->rule('requiredIf', 'nonexistent_field', 'bar');
+        $this->assertFalse($v->validate());
+    }
+
+    public function testConditionalRequiredNonExistentConditionField()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'bar'));
+        $v->rule('requiredIf', 'foo', 'nonexistent_field');
+        $this->assertTrue($v->validate());
+    }
+
+    public function testConditionalRequiredValidConditionMatched()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'foobar'));
+        $v->rule('requiredIf', 'foo', 'bar', 'foobar');
+        $this->assertTrue($v->validate());
+    }
+
+    public function testConditionalRequiredConditionNotMatched()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'foobar'));
+        $v->rule('requiredIf', 'foo', 'bar', 'barfoo');
+        $this->assertTrue($v->validate());
+    }
+
+    public function testConditionalRequiredNonExistentFieldConditionMatched()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'foobar'));
+        $v->rule('requiredIf', 'nonexistent_field', 'bar', 'foobar');
+        $this->assertFalse($v->validate());
+    }
+
+    public function testConditionalRequiredNonExistentFieldConditionNotMatched()
+    {
+        $v = new Validator(array('foo' => 'foo', 'bar' => 'foobar'));
+        $v->rule('requiredIf', 'nonexistent_field', 'bar', 'barfoo');
+        $this->assertTrue($v->validate());
+    }
+
     public function testEqualsValid()
     {
         $v = new Validator(array('foo' => 'bar', 'bar' => 'bar'));

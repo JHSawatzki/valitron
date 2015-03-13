@@ -2,6 +2,7 @@
 
 return array(
     'required'      => "ist erforderlich",
+    'requiredIf'      => "ist erforderlich",
     'equals'        => "muss identisch mit '%s' sein",
     'different'     => "muss sich von '%s' unterscheiden",
     'accepted'      => "muss markiert sein",
